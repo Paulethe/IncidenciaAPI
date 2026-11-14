@@ -33,22 +33,22 @@ public class AppDbContext : DbContext
         });
 
         modelBuilder.Entity<Departamento>().HasData(
-    new Departamento { Id = 1, Nombre = "Atl·ntida" },
+    new Departamento { Id = 1, Nombre = "Atl√°ntida" },
     new Departamento { Id = 2, Nombre = "Choluteca" },
-    new Departamento { Id = 3, Nombre = "ColÛn" },
+    new Departamento { Id = 3, Nombre = "Col√≥n" },
     new Departamento { Id = 4, Nombre = "Comayagua" },
-    new Departamento { Id = 5, Nombre = "Cop·n" },
-    new Departamento { Id = 6, Nombre = "CortÈs" },
-    new Departamento { Id = 7, Nombre = "El ParaÌso" },
-    new Departamento { Id = 8, Nombre = "Francisco Moraz·n" },
+    new Departamento { Id = 5, Nombre = "Cop√°n" },
+    new Departamento { Id = 6, Nombre = "Cort√©s" },
+    new Departamento { Id = 7, Nombre = "El Para√≠so" },
+    new Departamento { Id = 8, Nombre = "Francisco Moraz√°n" },
     new Departamento { Id = 9, Nombre = "Gracias a Dios" },
-    new Departamento { Id = 10, Nombre = "Intibuc·" },
-    new Departamento { Id = 11, Nombre = "Islas de la BahÌa" },
+    new Departamento { Id = 10, Nombre = "Intibuc√°" },
+    new Departamento { Id = 11, Nombre = "Islas de la Bah√≠a" },
     new Departamento { Id = 12, Nombre = "La Paz" },
     new Departamento { Id = 13, Nombre = "Lempira" },
     new Departamento { Id = 14, Nombre = "Ocotepeque" },
     new Departamento { Id = 15, Nombre = "Olancho" },
-    new Departamento { Id = 16, Nombre = "Santa B·rbara" },
+    new Departamento { Id = 16, Nombre = "Santa B√°rbara" },
     new Departamento { Id = 17, Nombre = "Valle" },
     new Departamento { Id = 18, Nombre = "Yoro" }
 );

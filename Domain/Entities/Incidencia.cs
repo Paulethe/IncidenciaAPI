@@ -8,7 +8,7 @@ public class Incidencia
     public string Estado { get; set; } = "Abierta";
     public DateTime FechaReporte { get; set; } = DateTime.UtcNow;
 
-    // RelaciÛn con el cat·logo
+    // Relaci√≥n con el cat√°logo
     public int DepartamentoId { get; set; }
     public Departamento? Departamento { get; set; }
 }
