@@ -1,0 +1,88 @@
+@host = http://localhost:5286
+@id = 5
+
+# Para repetir las pruebas: cree un registro con la petición 4
+# y use el id que devuelva en la variable @id.
+
+### 1. Listar (paginado)
+GET {{host}}/api/incidencias?page=1&pageSize=5
+
+### 2. Buscar por texto y filtrar por estado
+GET {{host}}/api/incidencias?search=internet&estado=EnProceso&page=1&pageSize=5
+
+### 3. Detalle
+GET {{host}}/api/incidencias/{{id}}
+
+### 4. Crear (201 + Location)
+POST {{host}}/api/incidencias
+Content-Type: application/json
+
+{
+  "titulo": "Router sin señal",
+  "descripcion": "El servicio se cayó desde ayer en la tarde.",
+  "departamentoId": 4
+}
+
+### 5. Crear repetido (409)
+POST {{host}}/api/incidencias
+Content-Type: application/json
+
+{
+  "titulo": "Sin servicio de internet",
+  "descripcion": "El servicio se cayó desde ayer en la tarde.",
+  "departamentoId": 4
+}
+
+### 6. Datos inválidos (400)
+POST {{host}}/api/incidencias
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "descripcion": "corta",
+  "departamentoId": 0
+}
+
+### 7. Departamento inexistente (400)
+POST {{host}}/api/incidencias
+Content-Type: application/json
+
+{
+  "titulo": "Prueba departamento",
+  "descripcion": "Departamento que no existe en la base.",
+  "departamentoId": 99
+}
+
+### 8. Actualizar (204)
+PUT {{host}}/api/incidencias/{{id}}
+Content-Type: application/json
+
+{
+  "titulo": "Sin servicio de internet",
+  "descripcion": "Actualizada: ya se envió un técnico.",
+  "departamentoId": 4,
+  "estado": "EnProceso"
+}
+
+### 9. Actualizar con estado inválido (400)
+PUT {{host}}/api/incidencias/{{id}}
+Content-Type: application/json
+
+{
+  "titulo": "Sin servicio de internet",
+  "descripcion": "Actualizada: ya se envió un técnico.",
+  "departamentoId": 4,
+  "estado": "Terminada"
+}
+
+### 10. No existe (404)
+GET {{host}}/api/incidencias/9999
+
+### 11. Eliminar (204)
+DELETE {{host}}/api/incidencias/{{id}}
+
+### 12. Eliminar inexistente (404)
+DELETE {{host}}/api/incidencias/9999
+
+### 13. Filtro inválido (400)
+GET {{host}}/api/incidencias?page=0
