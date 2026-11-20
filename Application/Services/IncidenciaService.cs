@@ -15,7 +15,7 @@ public interface IIncidenciaService
     Task EliminarAsync(int id, CancellationToken ct = default);
 }
 
-public class IncidenciaService(IIncidenciaRepository repo) : IIncidenciaService
+public class IncidenciaService(IIncidenciaRepository repo, IArchivoStorage storage) : IIncidenciaService
 {
     public async Task<ResultadoPaginado<IncidenciaDto>> ListarAsync(string? search, string? estado,
         int? departamentoId, int page, int pageSize, CancellationToken ct = default)
@@ -45,7 +45,7 @@ public class IncidenciaService(IIncidenciaRepository repo) : IIncidenciaService
         };
 
         await repo.AgregarAsync(incidencia, ct);
-        return await ObtenerAsync(incidencia.Id, ct); // recarga con el nombre del departamento
+        return await ObtenerAsync(incidencia.Id, ct);
     }
 
     public async Task ActualizarAsync(int id, ActualizarIncidenciaDto dto, CancellationToken ct = default)
@@ -64,11 +64,20 @@ public class IncidenciaService(IIncidenciaRepository repo) : IIncidenciaService
     }
 
     public async Task EliminarAsync(int id, CancellationToken ct = default)
-    {
-        var incidencia = await repo.ObtenerPorIdAsync(id, ct)
-            ?? throw new NotFoundException($"No existe una incidencia con id {id}.");
-        await repo.EliminarAsync(incidencia, ct);
-    }
+{
+    var incidencia = await repo.ObtenerPorIdAsync(id, ct)
+        ?? throw new NotFoundException($"No existe una incidencia con id {id}.");
+
+   
+    var imagenRuta = incidencia.ImagenRuta;
+    var videoRuta = incidencia.VideoRuta;
+
+    await repo.EliminarAsync(incidencia, ct);
+
+   
+    storage.Eliminar(imagenRuta);
+    storage.Eliminar(videoRuta);
+}
 
     private async Task ValidarReglasAsync(CrearIncidenciaDto dto, int? excluirId, CancellationToken ct)
     {

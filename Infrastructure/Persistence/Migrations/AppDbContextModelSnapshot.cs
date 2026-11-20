@@ -156,10 +156,22 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("FechaReporte")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImagenContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagenRuta")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("VideoContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoRuta")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
