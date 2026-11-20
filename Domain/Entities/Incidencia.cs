@@ -11,4 +11,8 @@ public class Incidencia
     // Relación con el catálogo
     public int DepartamentoId { get; set; }
     public Departamento? Departamento { get; set; }
+    public string? ImagenRuta { get; set; }
+    public string? ImagenContentType { get; set; }
+    public string? VideoRuta { get; set; }
+    public string? VideoContentType { get; set; }
 }

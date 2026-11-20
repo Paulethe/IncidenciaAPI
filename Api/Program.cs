@@ -6,6 +6,7 @@ using Scalar.AspNetCore;
 using Api.Middleware;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,10 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSingleton<IArchivoStorage>(_ =>
+    new ArchivoStorage(Path.Combine(builder.Environment.ContentRootPath, "uploads")));
+builder.Services.AddScoped<IncidenciaMultimediaService>();
 
 builder.Services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
 builder.Services.AddScoped<IIncidenciaRepository, IncidenciaRepository>();
